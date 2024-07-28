@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "Oc5UpK35qSA=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Elcu\\Documents\\Projects\\NotificationSystem\\EmailNotificator\\Infrastructure.Reader\\Infrastructure.Reader.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Elcu\\.nuget\\packages\\confluent.kafka\\2.4.0\\confluent.kafka.2.4.0.nupkg.sha512",
+    "C:\\Users\\Elcu\\.nuget\\packages\\csharpfunctionalextensions\\2.42.0\\csharpfunctionalextensions.2.42.0.nupkg.sha512",
+    "C:\\Users\\Elcu\\.nuget\\packages\\librdkafka.redist\\2.4.0\\librdkafka.redist.2.4.0.nupkg.sha512",
+    "C:\\Users\\Elcu\\.nuget\\packages\\system.memory\\4.5.0\\system.memory.4.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}

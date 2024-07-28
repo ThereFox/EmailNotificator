@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "3yA2y3JYefY=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Elcu\\Documents\\Projects\\NotificationSystem\\EmailNotificator\\Worker\\Worker.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Elcu\\.nuget\\packages\\csharpfunctionalextensions\\2.42.0\\csharpfunctionalextensions.2.42.0.nupkg.sha512"
+  ],
+  "logs": []
+}

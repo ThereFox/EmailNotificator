@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Me6H/bqmmhs=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Elcu\\Documents\\Projects\\NotificationSystem\\EmailNotificator\\Infrastructure.Sender\\Infrastructure.Sender.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Elcu\\.nuget\\packages\\csharpfunctionalextensions\\2.42.0\\csharpfunctionalextensions.2.42.0.nupkg.sha512"
+  ],
+  "logs": []
+}
