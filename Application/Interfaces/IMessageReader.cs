@@ -9,5 +9,6 @@ namespace Application.Interfaces;
 
 public interface IMessageReader
 {
+    public Task<Result<bool>> HasMessages();
     public Task<Result<NotificationInputObject>> GetNewMessage();
 }
