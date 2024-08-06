@@ -1,5 +1,5 @@
-﻿using Application.DTO;
-using CSharpFunctionalExtensions;
+﻿using CSharpFunctionalExtensions;
+using Domain.Entitys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
-    internal interface INotificationHandler
+    public interface INotificationHandler
     {
-        public Task<Result> Handl(NotificationInputObject notification); 
+        public Task<Result> Handle(Notification notification); 
     }
 }
