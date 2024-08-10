@@ -11,4 +11,9 @@
     <PackageReference Include="CSharpFunctionalExtensions" Version="2.42.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+
 </Project>
