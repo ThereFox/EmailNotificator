@@ -7,13 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worker", "Worker\Worker.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Sender", "Infrastructure.Sender\Infrastructure.Sender.csproj", "{27936C6A-E986-42C1-B9B8-16142C71FC91}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Reader", "Infrastructure.Reader\Infrastructure.Reader.csproj", "{C49240F3-C1B1-4614-985A-39E26666F56A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Brocker.Kafka", "Infrastructure.Reader\Infrastructure.Brocker.Kafka.csproj", "{C49240F3-C1B1-4614-985A-39E26666F56A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{F6D9C88C-54BC-46A4-8A64-41196C2A1AA7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{F57A30E7-15AA-4272-96AF-475B063998FE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistense.Notifications", "Notificator.Persistense\Persistense.Notifications.csproj", "{4E42409E-EAB7-4C31-A646-5FC1DC947067}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistense.Notifications.EFCore", "Notificator.Persistense\Persistense.Notifications.EFCore.csproj", "{4E42409E-EAB7-4C31-A646-5FC1DC947067}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{540CD811-9EAA-4167-A461-52CA301BBD8F}"
 EndProject
