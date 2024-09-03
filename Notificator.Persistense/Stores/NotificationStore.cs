@@ -15,31 +15,48 @@ public class NotificationStore : INotificationStore
         _context = context;
     }
 
-    public async Task<Result> Create(Notification notification)
+    public async Task<Result<Notification>> Get(Guid id)
     {
         try
         {
-            var owner = await _context.Devices.FirstAsync(ex => ex.Id == notification.Resiver.Id);
-            
-            var notificationEntity = new NotificationEntity()
+            var notification = await _context
+                .Notifications
+                .AsNoTracking()
+                .Include(ex => ex.Blueprint)
+                .Include(ex => ex.Customer)
+                    .ThenInclude(ex => ex.AllDevices)
+                .FirstOrDefaultAsync(ex => ex.Id == id);
+
+            if (notification == default)
             {
-                Id  = notification.Id,
-                Status = notification.Status.Value,
-                CreatedAt = notification.CreatedAt,
-                BlueprintId = notification.Blueprint.Id,
-                SendAt = notification.SendAt,
-                CustomerId = owner.CustomerId
-            } ;
+                return Result.Failure<Notification>($"dont contain element with id {id}");
+            }
 
-            _context.Notifications.Append(notificationEntity);
+            return notification.ToDomain();
+        }
+        catch (Exception ex)
+        {
+            return Result.Failure<Notification>(ex.Message);
+        }
+    }
 
+    public async Task<Result> SaveNew(Notification notification)
+    {
+        if(await _context.Database.CanConnectAsync() == false)
+        {
+            return Result.Failure("Cand connect to database");
+        }
+
+        try
+        {
+            _context.Notifications.Append(NotificationEntity.FromDomain(notification));
             await _context.SaveChangesAsync();
-
             return Result.Success();
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            return Result.Failure(e.Message);
+            return Result.Failure(ex.Message);
         }
+
     }
 }

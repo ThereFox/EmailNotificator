@@ -32,13 +32,6 @@ public class CustomerEntityConfiguration : IEntityTypeConfiguration<CustomerEnti
             .HasPrincipalKey(ex => ex.Id)
             .HasForeignKey(ex => ex.CustomerId)
             .IsRequired();
-
-        builder
-            .HasMany(ex => ex.ResivedNotifications)
-            .WithOne(ex => ex.Customer)
-            .HasPrincipalKey(ex => ex.Id)
-            .HasForeignKey(ex => ex.CustomerId)
-            .IsRequired();
         
     }
 }

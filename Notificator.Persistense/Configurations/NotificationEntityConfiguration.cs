@@ -27,10 +27,10 @@ public class NotificationEntityConfiguration : IEntityTypeConfiguration<Notifica
             .IsRequired();
 
         builder
-            .HasOne(ex => ex.Customer)
-            .WithMany(ex => ex.ResivedNotifications)
+            .HasOne(ex => ex.Device)
+            .WithMany(ex => ex.SendedNotification)
             .HasPrincipalKey(ex => ex.Id)
-            .HasForeignKey(ex => ex.CustomerId)
+            .HasForeignKey(ex => ex.DeviceId)
             .IsRequired();
 
     }

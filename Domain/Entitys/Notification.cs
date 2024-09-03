@@ -8,22 +8,22 @@ public class Notification
     public const int MaxCountByDay = 5;
     
     public Guid Id { get; init; }
-    public Device Resiver { get; init; }
+    public Device DeviceResiver { get; init; }
     public Blueprint Blueprint { get; init; }
     
     public NotificationStatus Status { get; private set; }
    
     public DateTime CreatedAt { get; init; }
-    public DateTime? SendAt { get; private set; }
+    public DateTime? SendedAt { get; private set; }
 
     public Notification(Guid id, Device resiver, Blueprint blueprint, NotificationStatus status, DateTime createdAt, DateTime? sendAt)
     {
         Id = id;
-        Resiver = resiver;
+        DeviceResiver = resiver;
         Blueprint = blueprint;
         Status = status;
         CreatedAt = createdAt;
-        SendAt = sendAt;
+        SendedAt = sendAt;
     }
 
     public static Result<Notification> Create(Guid id, Device resiver, Blueprint blueprint, NotificationStatus status,
@@ -57,7 +57,7 @@ public class Notification
 
         if (newStatus == NotificationStatus.Sended)
         {
-            SendAt = DateTime.Now;
+            SendedAt = DateTime.Now;
         }
         
         Status = newStatus;
