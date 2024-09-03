@@ -7,6 +7,12 @@ using System.Text;
 using Notificator.Persistense.DI;
 using Microsoft.Extensions.Hosting;
 using Coravel;
+using Autofac.Extensions.DependencyInjection;
+using Application;
+using Infrastructure.Kafka;
+using Infrastructure.Sender;
+using Persistense.Logging.InfluxDB;
+using Persistense.Notifications.EFCore;
 
 namespace Worker
 {
@@ -14,16 +20,23 @@ namespace Worker
     {
         public static void Main()
         {
-            var builder = new ContainerBuilder();
+            var builder = new HostApplicationBuilder();
 
-            builder.RegisterModule<PersistenseModule>();
+            builder.Services
+                .AddApp()
+                .AddMessageBrockerConsumer()
+                .AddNotificatorSender()
+                .AddInfluexDBLogging()
+                .AddDAL();
 
-            var container = builder.Build();
+            var app = builder.Build();
 
-            container.Resolve<IHost>().Services.UseScheduler(
-                sheduler => sheduler.Schedule<HandleNotificationTask>()
-                .EveryThirtyMinutes()
+            app.Services.UseScheduler(
+                ex => ex.Schedule<HandleNotificationTask>()
+                .EveryFiveMinutes()
                 );
+
+            app.Run();
         }
     }
 }

@@ -1,5 +1,5 @@
 using System.Net;
-using Application.Interfaces;
+using Application.Interfaces.Services;
 using Confluent.Kafka;
 using Infrastructure.Kafka.Requests;
 using Infrastructure.Reader;
@@ -7,9 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.Kafka;
 
-public static class DI
+public static class ConsumerRegister
 {
-    public static IServiceCollection AddMessageBrocker(this IServiceCollection collection, string brockerUrl)
+    public static IServiceCollection AddMessageBrockerConsumer(this IServiceCollection collection, string brockerUrl)
     {
         var config = new ProducerConfig
         {
@@ -17,13 +17,13 @@ public static class DI
             AllowAutoCreateTopics = true
         };
         
-        var producer = new ConsumerBuilder<Null, SendNotificationRequest>(config)
+        var producer = new ConsumerBuilder<Null, SendNotificationCommand>(config)
             .Build();
 
         
         collection.AddSingleton(producer);
 
-        collection.AddSingleton<IMessageReader, KafkaConsumer>();
+        collection.AddSingleton<IMessageGetter, KafkaConsumer>();
 
         return collection;
     }
