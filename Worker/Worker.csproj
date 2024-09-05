@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Coravel" Version="5.0.4" />
     <PackageReference Include="CSharpFunctionalExtensions" Version="2.42.5" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
@@ -16,8 +15,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
-    <ProjectReference Include="..\Infrastructure.Reader\Infrastructure.Brocker.Kafka.csproj" />
+    <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Infrastructure.Logging.InfluexDB\Persistense.Logging.InfluxDB.csproj" />
+    <ProjectReference Include="..\Infrastructure.Reader\Infrastructure.Brocker.Kafka.Consumer.csproj" />
     <ProjectReference Include="..\Infrastructure.Sender\Infrastructure.Sender.csproj" />
+    <ProjectReference Include="..\Notificator.Persistense\Persistense.Notifications.EFCore.csproj" />
   </ItemGroup>
 
 </Project>

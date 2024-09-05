@@ -1,4 +1,4 @@
-﻿using Application.Interfaces;
+﻿using Application.Interfaces.Services;
 using CSharpFunctionalExtensions;
 using Domain.Entitys;
 
