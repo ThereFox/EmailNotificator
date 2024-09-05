@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using InfluxDB3.Client;
 using System.Text;
+using Application.Interfaces.Services;
 
 namespace Infrastructure.Logging.InfluxDB
 {
@@ -19,14 +20,14 @@ namespace Infrastructure.Logging.InfluxDB
             _client = client;
         }
 
-        public async Task LogAddToQueue(Notification message)
+        public async Task LogSendMessage(Notification message)
         {
             var point = InfluxDB3.Client.Write.PointData.Measurement("Action")
-                .SetStringField("type", "AddToQueue")
+                .SetStringField("type", "SendMessage")
                 .SetTimestamp(DateTime.Now)
                 .SetStringField("NotificationId", message.Id.ToString())
                 .SetStringField("TemplateId", message.Blueprint.Id.ToString())
-                .SetStringField("ResiverId", message.Resiver.Id.ToString())
+                .SetStringField("ResiverId", message.DeviceResiver.Id.ToString())
                 .SetStringField("CreatedAt", message.CreatedAt.ToString());
 
             await _client.WritePointAsync(point, "TestBucket");
@@ -50,6 +51,17 @@ namespace Infrastructure.Logging.InfluxDB
                 .SetTimestamp(DateTime.Now)
                 .SetStringField("BlueprintId", bluepringId.ToString())
                 .SetStringField("CustomerId", customerId.ToString());
+
+            await _client.WritePointAsync(point, "TestBucket");
+        }
+
+        public async Task LogAddToQueue(Notification message)
+        {
+            var point = InfluxDB3.Client.Write.PointData.Measurement("Action")
+                .SetStringField("type", "SendReport")
+                .SetTimestamp(DateTime.Now)
+                .SetStringField("NotificationId", message.Id.ToString())
+                .SetStringField("CreatedAt", message.CreatedAt.ToString());
 
             await _client.WritePointAsync(point, "TestBucket");
         }
