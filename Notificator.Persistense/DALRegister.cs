@@ -1,6 +1,7 @@
 ﻿using App.Stores;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Persistense.Notifications.EFCore.Stores;
 using Persistense.Stores;
 using System;
 using System.Collections.Generic;
@@ -22,9 +23,9 @@ namespace Persistense.Notifications.EFCore
             , ServiceLifetime.Scoped
             );
 
-            services.AddTransient<IBlueprintStore, BlueprintStore>();
-            services.AddTransient<ICustomerStore, CustomerStore>();
-            services.AddTransient<INotificationStore, NotificationStore>();
+            services.AddScoped<IBlueprintStore, BlueprintStore>();
+            services.AddScoped<ICustomerStore, CustomerStore>();
+            services.AddScoped<INotificationStore, NotificationStore>();
 
             return services;
         }

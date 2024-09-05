@@ -23,8 +23,8 @@ public class NotificationStore : INotificationStore
                 .Notifications
                 .AsNoTracking()
                 .Include(ex => ex.Blueprint)
-                .Include(ex => ex.Customer)
-                    .ThenInclude(ex => ex.AllDevices)
+                .Include(ex => ex.Device)
+                    .ThenInclude(ex => ex.Owner)
                 .FirstOrDefaultAsync(ex => ex.Id == id);
 
             if (notification == default)
