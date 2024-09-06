@@ -1,5 +1,6 @@
-﻿/Application/obj
-/.vs/Worker
-/Core/obj
-
-*/obj/*
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+.vs/
