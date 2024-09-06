@@ -27,11 +27,17 @@ public class NotificationBlueprintEntity
     {
         var validateChannel = NotificationChannel.Create(Channel);
 
+        var validateTemplate = BlueprintTemplate.Create(Content);
+
         if (validateChannel.IsFailure)
         {
             return Result.Failure<Blueprint>($"invalid channel error: {validateChannel.Error}");
         }
+        if (validateTemplate.IsFailure)
+        {
+            return Result.Failure<Blueprint>($"invalid content error: {validateTemplate.Error}");
+        }
 
-        return Blueprint.Create(Id, validateChannel.Value);
+        return Blueprint.Create(Id, validateTemplate.Value, validateChannel.Value);
     }
 }
