@@ -10,11 +10,12 @@ namespace Infrastructure.Kafka;
 
 public static class ConsumerRegister
 {
-    public static IServiceCollection AddCommandReader(this IServiceCollection collection, string brockerUrl, string topicName)
+    public static IServiceCollection AddCommandReader(this IServiceCollection collection, string brockerUrl, string topicName, string groupId)
     {
         var config = new ConsumerConfig
         {
-            BootstrapServers = brockerUrl
+            BootstrapServers = brockerUrl,
+            GroupId = groupId
         };
         
         var consumer = new ConsumerBuilder<Ignore, string>(config)

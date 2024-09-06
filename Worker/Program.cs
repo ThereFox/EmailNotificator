@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Notificator.Persistense.DI;
 using Microsoft.Extensions.Hosting;
 using Coravel;
 using Autofac.Extensions.DependencyInjection;
@@ -13,6 +12,8 @@ using Infrastructure.Kafka;
 using Infrastructure.Sender;
 using Persistense.Logging.InfluxDB;
 using Persistense.Notifications.EFCore;
+using Microsoft.Extensions.Configuration;
+using Notification.ConfigsInputObjects;
 
 namespace Worker
 {
@@ -20,14 +21,20 @@ namespace Worker
     {
         public static void Main()
         {
-            var builder = new HostApplicationBuilder();
+            var builder = Host.CreateApplicationBuilder();
+
+            var config = builder.Configuration.GetSection("Connections").Get<ConnectionsForServices>();
+
+            var consumerConfig = config.Brockers.ConsumerInfo;
+
+            builder.Services.AddScheduler();
 
             builder.Services
                 .AddApp()
-                .AddMessageBrockerConsumer()
+                .AddCommandReader(consumerConfig.BrockerUrl, consumerConfig.TopicName, consumerConfig.GroupId)
                 .AddNotificatorSender()
-                .AddInfluexDBLogging()
-                .AddDAL();
+                .AddInfluexDBLogging(config.Databases.Logs)
+                .AddDAL(config.Databases.Main.ConnectionString);
 
             var app = builder.Build();
 

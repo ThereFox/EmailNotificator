@@ -4,6 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <UserSecretsId>6baf5b90-d76d-4669-ae4c-eb932adbd38e</UserSecretsId>
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,10 +19,17 @@
     <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Infrastructure.Brocker.Kafka.Producer\Infrastructure.Brocker.Kafka.Producer.csproj" />
     <ProjectReference Include="..\Infrastructure.Logging.InfluexDB\Persistense.Logging.InfluxDB.csproj" />
     <ProjectReference Include="..\Infrastructure.Reader\Infrastructure.Brocker.Kafka.Consumer.csproj" />
     <ProjectReference Include="..\Infrastructure.Sender\Infrastructure.Sender.csproj" />
     <ProjectReference Include="..\Notificator.Persistense\Persistense.Notifications.EFCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

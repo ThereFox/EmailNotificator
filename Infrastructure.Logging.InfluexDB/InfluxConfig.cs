@@ -8,9 +8,9 @@ namespace Infrastructure.Logging.InfluxDB
 {
     public record InfluxConfig
     (
-        string host,
-        string token,
-        string organisation,
-        string database
+        string Host,
+        string Token,
+        string Organisation,
+        string Bucket
     );
 }
