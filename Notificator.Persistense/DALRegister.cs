@@ -20,12 +20,12 @@ namespace Persistense.Notifications.EFCore
         {
             services.AddDbContext<ApplicationDBContext>(
                 (ex) => ex.UseNpgsql(connectionString)
-            , ServiceLifetime.Scoped
+            , ServiceLifetime.Singleton
             );
 
-            services.AddScoped<IBlueprintStore, BlueprintStore>();
-            services.AddScoped<ICustomerStore, CustomerStore>();
-            services.AddScoped<INotificationStore, NotificationStore>();
+            services.AddSingleton<IBlueprintStore, BlueprintStore>();
+            services.AddSingleton<ICustomerStore, CustomerStore>();
+            services.AddSingleton<INotificationStore, NotificationStore>();
 
             return services;
         }

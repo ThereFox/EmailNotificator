@@ -16,10 +16,10 @@ namespace Persistense.Logging.InfluxDB
                     this IServiceCollection serviceProvider,
                     InfluxConfig config)
         {
-            serviceProvider.AddScoped<IInfluxDBClient, InfluxDBClient>(
+            serviceProvider.AddSingleton<IInfluxDBClient, InfluxDBClient>(
                 creator => new InfluxDBClient(config.Host, config.Token, config.Organisation, config.Bucket)
                 );
-            serviceProvider.AddScoped<ILogger, InfluexDBLogger>();
+            serviceProvider.AddSingleton<ILogger, InfluexDBLogger>();
 
             return serviceProvider;
         }

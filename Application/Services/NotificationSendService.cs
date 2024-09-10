@@ -14,6 +14,21 @@ public class NotificationSendService
     private readonly INotificationHandler _notificationHandler;
     private readonly NotificationCreator _validator;
     private readonly ILogger _logger;
+    private readonly IReportSender _reportSender;
+
+    public NotificationSendService(
+        IMessageGetter getter,
+        INotificationHandler handler,
+        NotificationCreator validator,
+        ILogger logger,
+        IReportSender reportSender)
+    {
+        _messageService = getter;
+        _notificationHandler = handler;
+        _validator = validator;
+        _logger = logger;
+        _reportSender = reportSender;
+    }
 
     public async Task<Result> HandleNotification()
     {
@@ -36,6 +51,8 @@ public class NotificationSendService
 
             await _logger.LogError(error);
 
+            await _reportSender.SendReport(getNewMessageResult.Value.Id, true);
+
             return error.AsResult();
         }
 
@@ -47,8 +64,16 @@ public class NotificationSendService
 
             await _logger.LogError(error);
         }
+        else
+        {
+            await _logger.LogSendMessage(validateMessageResult.Value);
+        }
 
-        return handleResult;
+
+        var sendReportResult = await _reportSender.SendReport(getNewMessageResult.Value.Id, handleResult.IsFailure);
+
+
+        return sendReportResult;
 
     }
 }

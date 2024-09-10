@@ -13,7 +13,7 @@ namespace Infrastructure.Sender
         public static IServiceCollection AddNotificatorSender(this IServiceCollection services)
         {
             return services
-                .AddScoped<INotificationHandler, EmailNotificator>();
+                .AddSingleton<INotificationHandler, EmailNotificator>();
         }
     }
 }

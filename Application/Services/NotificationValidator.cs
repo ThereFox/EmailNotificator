@@ -16,6 +16,12 @@ namespace Application.Services
         private readonly ICustomerStore _customerStore;
         private readonly IBlueprintStore _blueprintStore;
 
+        public NotificationCreator(ICustomerStore customers, IBlueprintStore blueprint)
+        {
+            _customerStore = customers;
+            _blueprintStore = blueprint;
+        }
+
         public async Task<Result<Notification>> CreateByInfo(SendNotificationInputObject request)
         {
             var blueprintCreateResult = await CreateBlueprint(request.BlueprintId);
@@ -25,7 +31,7 @@ namespace Application.Services
                 return blueprintCreateResult.ConvertFailure<Notification>();
             }
 
-            var getDeviceResult = await GetDeviceByCustomer(request.CustomerId, blueprintCreateResult.Value.Channel);
+            var getDeviceResult = await GetDeviceByCustomer(request.ClientId, blueprintCreateResult.Value.Channel);
 
             if (getDeviceResult.IsFailure)
             {
@@ -44,7 +50,8 @@ namespace Application.Services
         }
         protected async Task<Result<Device>> GetDeviceByCustomer(Guid CustomerId, NotificationChannel channel)
         {
-            var getCustomerResult = await _customerStore.Get(CustomerId);
+            var getCustomerResult = await _customerStore
+                .Get(CustomerId);
 
             if (getCustomerResult.IsFailure)
             {
