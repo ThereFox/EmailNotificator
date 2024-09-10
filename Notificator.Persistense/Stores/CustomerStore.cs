@@ -30,18 +30,19 @@ namespace Persistense.Notifications.EFCore.Stores
                     var customer = await _dbContext
                         .CustomerEntities
                         .AsNoTracking()
+                        .Include(ex => ex.AllDevices)
                         .FirstOrDefaultAsync(ex => ex.Id == id);
 
                     if (customer == default)
                     {
-                        return Result.Failure<Customer>("dont contain blueprint with this Id");
+                        return Result.Failure<Customer>("dont contain customer with this Id");
                     }
 
                     var validateCustomer = customer.ToDomain();
 
                     if (validateCustomer.IsFailure)
                     {
-                        return Result.Failure<Customer>($"blueprint by this id invalid: {validateCustomer.Error}");
+                        return Result.Failure<Customer>($"customer by this id invalid: {validateCustomer.Error}");
                     }
 
                     return Result.Success(validateCustomer.Value);
