@@ -18,9 +18,10 @@ public static class ConsumerRegister
             GroupId = groupId
         };
         
-        var consumer = new ConsumerBuilder<Ignore, string>(config)
+        var consumer = new ConsumerBuilder<Null, string>(config)
             .Build();
 
+        consumer.Subscribe(topicName);
         
         collection.AddSingleton(consumer);
         collection.AddScoped<KafkaConsumer>();

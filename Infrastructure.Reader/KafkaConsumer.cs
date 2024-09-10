@@ -8,23 +8,19 @@ namespace Infrastructure.Reader
 {
     public class KafkaConsumer
     {
-        private const int TryDeadline = 200;
+        private const int TryDeadline = 2000;
         private const int TrysCount = 3;
 
-        private readonly IConsumer<Ignore, string> _consumer;
+        private readonly IConsumer<Null, string> _consumer;
 
-        public KafkaConsumer(IConsumer<Ignore, string> consumer)
+        public KafkaConsumer(IConsumer<Null, string> consumer)
         {
             _consumer = consumer;
         }
 
         public async Task<Result<string>> GetNewMessageFromTopic(string topic)
         {
-            _consumer.Subscribe(topic);
-
             var readResult = await _consumer.TryGetAsync(TrysCount, TryDeadline);
-
-            _consumer.Unsubscribe();
 
             if (readResult.IsFailure)
             {
