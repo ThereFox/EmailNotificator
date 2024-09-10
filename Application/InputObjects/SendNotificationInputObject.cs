@@ -4,5 +4,5 @@ public record SendNotificationInputObject
 (
     Guid Id,
     Guid BlueprintId,
-    Guid CustomerId
+    Guid ClientId
 );
