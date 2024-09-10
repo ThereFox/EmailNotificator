@@ -49,7 +49,7 @@ public class NotificationStore : INotificationStore
 
         try
         {
-            _context.Notifications.Append(NotificationEntity.FromDomain(notification));
+            await _context.Notifications.AddAsync(NotificationEntity.FromDomain(notification));
             await _context.SaveChangesAsync();
             return Result.Success();
         }

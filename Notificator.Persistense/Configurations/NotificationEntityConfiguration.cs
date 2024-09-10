@@ -12,6 +12,10 @@ public class NotificationEntityConfiguration : IEntityTypeConfiguration<Notifica
             .HasKey(ex => ex.Id);
 
         builder
+            .Property(ex => ex.Id)
+            .ValueGeneratedNever();
+
+        builder
             .Property(ex => ex.Status)
             .HasColumnType("varchar")
             .IsRequired();
