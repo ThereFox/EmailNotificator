@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Extensions.Hosting;
-using Coravel;
 using Autofac.Extensions.DependencyInjection;
 using Application;
 using Infrastructure.Kafka;
@@ -14,6 +13,9 @@ using Persistense.Logging.InfluxDB;
 using Persistense.Notifications.EFCore;
 using Microsoft.Extensions.Configuration;
 using Notification.ConfigsInputObjects;
+using System.Runtime.CompilerServices;
+using Infrastructure.Brocker.Kafka.Consumer.Service;
+using Infrastructure.Brocker.Kafka.Producer;
 
 namespace Worker
 {
@@ -23,25 +25,23 @@ namespace Worker
         {
             var builder = Host.CreateApplicationBuilder();
 
+            builder.Configuration.AddUserSecrets(typeof(Program).Assembly);
+
             var config = builder.Configuration.GetSection("Connections").Get<ConnectionsForServices>();
 
             var consumerConfig = config.Brockers.ConsumerInfo;
-
-            builder.Services.AddScheduler();
+            var producerInfo = config.Brockers.ProducerInfo;
 
             builder.Services
                 .AddApp()
                 .AddCommandReader(consumerConfig.BrockerUrl, consumerConfig.TopicName, consumerConfig.GroupId)
+                .AddCommandReaderService()
+                .AddReportSender(producerInfo.BrockerUrl, producerInfo.TopicName)
                 .AddNotificatorSender()
                 .AddInfluexDBLogging(config.Databases.Logs)
                 .AddDAL(config.Databases.Main.ConnectionString);
 
             var app = builder.Build();
-
-            app.Services.UseScheduler(
-                ex => ex.Schedule<HandleNotificationTask>()
-                .EveryFiveMinutes()
-                );
 
             app.Run();
         }
