@@ -32,6 +32,7 @@ namespace Worker
 
             var consumerConfig = config.Brockers.ConsumerInfo;
             var producerInfo = config.Brockers.ProducerInfo;
+            var cacheInfo = config.Databases.Cache;
 
             builder.Services
                 .AddApp()
@@ -41,7 +42,7 @@ namespace Worker
                 .AddNotificatorSender()
                 .AddInfluexDBLogging(config.Databases.Logs)
                 .AddDAL(config.Databases.Main.ConnectionString)
-                .AddRedisCache();
+                .AddRedisCache(cacheInfo.Host, cacheInfo.Port, cacheInfo.UserName, cacheInfo.UserPassword);
 
             var app = builder.Build();
 

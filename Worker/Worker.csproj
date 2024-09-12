@@ -29,6 +29,7 @@
     <ProjectReference Include="..\Infrastructure.Reader\Infrastructure.Brocker.Kafka.Consumer.csproj" />
     <ProjectReference Include="..\Infrastructure.Sender\Infrastructure.Sender.csproj" />
     <ProjectReference Include="..\Notificator.Persistense\Persistense.Notifications.EFCore.csproj" />
+    <ProjectReference Include="..\Persistense.Notifications.Cache\Persistense.Notifications.Cache.csproj" />
   </ItemGroup>
 
   <ItemGroup>

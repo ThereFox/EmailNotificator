@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistense.Logging.InfluxD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Brocker.Kafka.Producer", "Infrastructure.Brocker.Kafka.Producer\Infrastructure.Brocker.Kafka.Producer.csproj", "{02BDD705-EAD8-4964-AB25-CD9A30F8387E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Brocker.Kafka.Consumer.Service", "Infrastructure.Brocker.Kafka.Consumer.Service\Infrastructure.Brocker.Kafka.Consumer.Service.csproj", "{342C6594-CEB4-4697-8BE5-0B14A1EE9F83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Brocker.Kafka.Consumer.Service", "Infrastructure.Brocker.Kafka.Consumer.Service\Infrastructure.Brocker.Kafka.Consumer.Service.csproj", "{342C6594-CEB4-4697-8BE5-0B14A1EE9F83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistense.Notifications.Cache", "Persistense.Notifications.Cache\Persistense.Notifications.Cache.csproj", "{F7BEE85F-E295-4005-B3C9-554FA34856BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{342C6594-CEB4-4697-8BE5-0B14A1EE9F83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{342C6594-CEB4-4697-8BE5-0B14A1EE9F83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{342C6594-CEB4-4697-8BE5-0B14A1EE9F83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7BEE85F-E295-4005-B3C9-554FA34856BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7BEE85F-E295-4005-B3C9-554FA34856BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7BEE85F-E295-4005-B3C9-554FA34856BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7BEE85F-E295-4005-B3C9-554FA34856BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
