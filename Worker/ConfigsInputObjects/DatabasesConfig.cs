@@ -12,6 +12,6 @@ namespace Worker.ConfigsInputObjects
     (
       DatabaseConfig Main,
       InfluxConfig Logs,
-      CacheConfig Cache
+      RedisConfig Cache
     );
 }

@@ -16,6 +16,7 @@ using Notification.ConfigsInputObjects;
 using System.Runtime.CompilerServices;
 using Infrastructure.Brocker.Kafka.Consumer.Service;
 using Infrastructure.Brocker.Kafka.Producer;
+using Persistense.Notifications.Cache;
 
 namespace Worker
 {
@@ -39,7 +40,8 @@ namespace Worker
                 .AddReportSender(producerInfo.BrockerUrl, producerInfo.TopicName)
                 .AddNotificatorSender()
                 .AddInfluexDBLogging(config.Databases.Logs)
-                .AddDAL(config.Databases.Main.ConnectionString);
+                .AddDAL(config.Databases.Main.ConnectionString)
+                .AddRedisCache();
 
             var app = builder.Build();
 

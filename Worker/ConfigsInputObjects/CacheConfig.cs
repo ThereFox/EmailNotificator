@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Worker.ConfigsInputObjects
 {
-    public record CacheConfig
+    public record RedisConfig
     (
-        string Url
+        string Host,
+        int Port,
+        string CommonPassword,
+        string UserName,
+        string UserPassword
     );
 }
