@@ -1,4 +1,5 @@
 ﻿using Application;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,12 @@ namespace Infrastructure.Brocker.Kafka.Consumer.Service
 {
     public class CommandReaderService : IHostedService
     {
-        private readonly NotificationSendService _service;
+        private readonly IServiceScopeFactory _scopeFactory;
         private CancellationTokenSource _cancelerTokenSource = new();
 
-        public CommandReaderService(NotificationSendService service)
+        public CommandReaderService(IServiceScopeFactory scopeFactory)
         {
-            _service = service;
+            _scopeFactory = scopeFactory;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
@@ -28,13 +29,23 @@ namespace Infrastructure.Brocker.Kafka.Consumer.Service
         {
             while (_cancelerTokenSource.IsCancellationRequested == false)
             {
-                await handleMessages();
+                await handleMessagesInNewScope();
             }
         }
 
-        private async Task handleMessages()
+        private async Task handleMessagesInNewScope()
         {
-            var handleNotificationResult = await _service.HandleNotification();
+            using(var scope = _scopeFactory.CreateScope())
+            {
+                var sendService = scope.ServiceProvider.GetService<NotificationSendService>();
+
+                await handleMessages(sendService);
+            }
+        }
+
+        private async Task handleMessages(NotificationSendService service)
+        {
+            var handleNotificationResult = await service.HandleNotification();
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)
