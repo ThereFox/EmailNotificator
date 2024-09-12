@@ -7,15 +7,27 @@ namespace Common
         string ErrorMessage
     );
 
-    public static class AsResultClass
+
+    public static class FromResult
     {
-        public static Result AsResult(this Error error)
+        public static Error AsError(this Result from)
         {
-            return Result.Failure(error.ErrorMessage);
+            if (from.IsSuccess)
+            {
+                throw new InvalidCastException("from dont contain error");
+            }
+
+            return new Error(from.Error);
         }
-        public static Result<T> AsResult<T>(this Error error)
+        public static Error AsError<T>(this Result<T> from)
         {
-            return Result.Failure<T>(error.ErrorMessage);
+            if (from.IsSuccess)
+            {
+                throw new InvalidCastException("from dont contain error");
+            }
+
+            return new Error(from.Error);
         }
     }
+
 }

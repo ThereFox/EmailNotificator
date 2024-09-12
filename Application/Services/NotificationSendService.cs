@@ -36,33 +36,27 @@ public class NotificationSendService
 
         if (getNewMessageResult.IsFailure)
         {
-            var error = new Error($"Error while getting new message: {getNewMessageResult.Error}");
+            await _logger.LogError(getNewMessageResult.AsError());
 
-            await _logger.LogError(error);
-
-            return error.AsResult();
+            return getNewMessageResult;
         }
 
         var validateMessageResult = await _validator.CreateByInfo(getNewMessageResult.Value);
 
         if (validateMessageResult.IsFailure)
         {
-            var error = new Error($"Error while validating new message: {validateMessageResult.Error}");
-
-            await _logger.LogError(error);
+            await _logger.LogError(validateMessageResult.AsError());
 
             await _reportSender.SendReport(getNewMessageResult.Value.Id, true);
 
-            return error.AsResult();
+            return validateMessageResult;
         }
 
         var handleResult = await _notificationHandler.Handle(validateMessageResult.Value);
 
         if (handleResult.IsFailure)
         {
-            var error = new Error($"Error while handling new message: {validateMessageResult.Error}");
-
-            await _logger.LogError(error);
+            await _logger.LogError(handleResult.AsError());
         }
         else
         {
