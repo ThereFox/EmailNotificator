@@ -20,6 +20,7 @@ COPY ["Infrastructure.Logging.InfluexDB/Persistense.Logging.InfluxDB.csproj", "I
 COPY ["Infrastructure.Reader/Infrastructure.Brocker.Kafka.Consumer.csproj", "Infrastructure.Reader/"]
 COPY ["Infrastructure.Sender/Infrastructure.Sender.csproj", "Infrastructure.Sender/"]
 COPY ["Notificator.Persistense/Persistense.Notifications.EFCore.csproj", "Notificator.Persistense/"]
+COPY ["Persistense.Notifications.Cache/Persistense.Notifications.Cache.csproj", "Persistense.Notifications.Cache/"]
 RUN dotnet restore "./Worker/Worker.csproj"
 COPY . .
 WORKDIR "/src/Worker"
