@@ -4,7 +4,6 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <UserSecretsId>6baf5b90-d76d-4669-ae4c-eb932adbd38e</UserSecretsId>
     <OutputType>Exe</OutputType>
     <StartupObject>Worker.Program</StartupObject>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
