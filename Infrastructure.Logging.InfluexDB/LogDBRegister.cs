@@ -23,7 +23,7 @@ namespace Persistense.Logging.InfluxDB
                 ex =>
                 {
                     var service = ex.GetService<IInfluxDBClient>();
-                    return new InfluexDBLogger(service, config.database);
+                    return new InfluexDBLogger(service, config.Bucket);
                 }
             );
 
