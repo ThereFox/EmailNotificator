@@ -12,8 +12,8 @@ namespace Application
     {
         public static IServiceCollection AddApp(this IServiceCollection services)
         {
-            return services.AddSingleton<NotificationSendService>()
-                .AddSingleton<NotificationCreator>();
+            return services.AddScoped<NotificationSendService>()
+                .AddScoped<NotificationCreator>();
         }
     }
 }

@@ -23,8 +23,8 @@ namespace Infrastructure.Brocker.Kafka.Producer
 
             collection.AddSingleton(new ProducerBuilder<Null, string>(producerConfig).Build());
 
-            collection.AddSingleton<KafkaProducer>();
-            collection.AddSingleton<IReportSender, ReportProducer>(
+            collection.AddScoped<KafkaProducer>();
+            collection.AddTransient<IReportSender, ReportProducer>(
                 ex =>
                 {
                     var producer = ex.GetService<KafkaProducer>();
