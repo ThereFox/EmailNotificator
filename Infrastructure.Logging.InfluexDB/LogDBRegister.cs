@@ -19,7 +19,13 @@ namespace Persistense.Logging.InfluxDB
             serviceProvider.AddScoped<IInfluxDBClient, InfluxDBClient>(
                 creator => new InfluxDBClient(config.Host, config.Token, config.Organisation, config.Bucket)
                 );
-            serviceProvider.AddScoped<ILogger, InfluexDBLogger>();
+            serviceProvider.AddScoped<ILogger, InfluexDBLogger>(
+                ex =>
+                {
+                    var service = ex.GetService<IInfluxDBClient>();
+                    return new InfluexDBLogger(service, config.database);
+                }
+            );
 
             return serviceProvider;
         }
